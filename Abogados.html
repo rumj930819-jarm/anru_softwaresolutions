@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vanguardia & Asociados | Firma Legal Corporativa</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-navy: #0A192F;
+            --secondary-navy: #112240;
+            --accent-gold: #C5A059;
+            --accent-gold-light: #E5C17C;
+            --text-light: #F8FAFC;
+            --text-muted: #94A3B8;
+            --bg-card: #1E293B;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--primary-navy);
+            color: var(--text-light);
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* --- HEADER & NAVEGACIÓN --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 1.2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 0;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -7px);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: var(--secondary-navy);
+            padding: 6rem 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: var(--transition);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            border-left: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--accent-gold), #9A7B3E);
+            color: #000;
+            padding: 0.85rem 1.4rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+            font-size: 0.95rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-gold:active {
+            transform: scale(0.98);
+        }
+
+        /* --- HERO CARRUSEL --- */
+        .hero-carousel {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding-top: 60px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            transform: scale(1.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.28);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 1.85rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.25;
+        }
+
+        .hero-content p {
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            margin-bottom: 1.8rem;
+            line-height: 1.5;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 25, 47, 0.7);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--accent-gold);
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        /* --- SECCIONES GENERALES --- */
+        section {
+            padding: 4rem 1.2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 1.75rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- ESPECIALIDADES --- */
+        .grid-practices {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+
+        .practice-card {
+            background: var(--bg-card);
+            padding: 1.8rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .practice-card:active {
+            transform: scale(0.98);
+        }
+
+        .practice-icon {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .practice-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .practice-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* --- EQUIPO (CORREGIDO PARA VISIBILIDAD DE ROSTROS) --- */
+        .grid-team {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .team-card {
+            background: var(--secondary-navy);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .team-img-wrapper {
+            width: 100%;
+            aspect-ratio: 4/5; /* Mantiene la proporción idónea para retratos */
+            overflow: hidden;
+            background-color: var(--primary-navy);
+        }
+
+        .team-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center; /* Enfoca prioritariamente la cabeza y rostro */
+            transition: var(--transition);
+        }
+
+        .team-card:hover .team-img {
+            transform: scale(1.03);
+        }
+
+        .team-info {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .team-info h3 {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .team-role {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+
+        .cedula {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            align-self: flex-start;
+        }
+
+        .team-info p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+        }
+
+        .team-info a {
+            margin-top: auto;
+        }
+
+        /* --- AGENDAMIENTO --- */
+        .booking-container {
+            background: linear-gradient(135deg, var(--secondary-navy), var(--bg-card));
+            border-radius: 12px;
+            padding: 1.8rem 1.2rem;
+            border: 1px solid var(--accent-gold);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .booking-text h2 {
+            font-size: 1.6rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.8rem;
+        }
+
+        .booking-text p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .booking-form .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .booking-form label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .booking-form input, 
+        .booking-form select, 
+        .booking-form textarea {
+            width: 100%;
+            padding: 0.85rem;
+            border-radius: 6px;
+            background: var(--primary-navy);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--text-light);
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .booking-form input:focus, 
+        .booking-form select:focus, 
+        .booking-form textarea:focus {
+            border-color: var(--accent-gold);
+        }
+
+        /* --- BLOG --- */
+        .grid-blog {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .blog-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 1.2rem;
+        }
+
+        .blog-tag {
+            color: var(--accent-gold);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .blog-content h3 {
+            font-size: 1.05rem;
+            margin: 0.4rem 0 0.8rem 0;
+            line-height: 1.35;
+        }
+
+        .blog-content p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+
+        /* --- BOTÓN FLOTANTE WHATSAPP --- */
+        .btn-float-wp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            text-decoration: none;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--secondary-navy);
+            padding: 2.5rem 1.2rem 1rem 1.2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .demo-tag {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- ANIMACIONES SCROLL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- DESKTOP QUERIES --- */
+        @media (min-width: 768px) {
+            .menu-toggle { display: none; }
+
+            .nav-menu {
+                position: static;
+                width: auto;
+                height: auto;
+                background: transparent;
+                padding: 0;
+                box-shadow: none;
+                flex-direction: row;
+                align-items: center;
+                border-left: none;
+            }
+
+            .nav-links {
+                flex-direction: row;
+                gap: 2rem;
+            }
+
+            .nav-links a {
+                padding: 0;
+                border-bottom: none;
+                font-size: 0.95rem;
+            }
+
+            .btn-gold {
+                width: auto;
+            }
+
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .grid-practices {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .grid-team {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .booking-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                padding: 3rem;
+                gap: 3rem;
+            }
+
+            .grid-blog {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .prev { left: 20px; }
+            .next { right: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-scale-balanced"></i> VANGUARDIA
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="#inicio" onclick="closeMenu()">Inicio</a></li>
+                    <li><a href="#especialidades" onclick="closeMenu()">Especialidades</a></li>
+                    <li><a href="#equipo" onclick="closeMenu()">Equipo</a></li>
+                    <li><a href="#citas" onclick="closeMenu()">Agendar Cita</a></li>
+                    <li><a href="#blog" onclick="closeMenu()">Artículos</a></li>
+                </ul>
+                <a href="https://wa.me/525634324690?text=Hola,%20deseo%20solicitar%20una%20consulta%20legal%20prioritaria." target="_blank" class="btn-gold">
+                    <i class="fa-brands fa-whatsapp"></i> Consulta Urgente
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO / CARRUSEL -->
+    <div id="inicio" class="hero-carousel">
+        <div class="slide active">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="hero-content">
+                <h1>Protegemos Tus Intereses Con Excelencia Estratégica</h1>
+                <p>Firma legal especializada en soluciones corporativas y litigación de alto impacto.</p>
+                <a href="#citas" class="btn-gold"><i class="fa-regular fa-calendar-check"></i> Agendar Evaluación</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="hero-content">
+                <h1>Defensa Penal y Fiscal Compleja</h1>
+                <p>Representación rigurosa enfocada en la protección patrimonial y personal.</p>
+                <a href="#especialidades" class="btn-gold"><i class="fa-solid fa-shield-halved"></i> Especialidades</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="hero-content">
+                <h1>Blindaje Corporativo para Empresas</h1>
+                <p>Estructuración de contratos, arbitraje y gestión de riesgo operacional.</p>
+                <a href="#citas" class="btn-gold"><i class="fa-solid fa-briefcase"></i> Asesoría Empresarial</a>
+            </div>
+        </div>
+
+        <button class="carousel-arrow prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="carousel-arrow next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+        <div class="carousel-dots">
+            <span class="dot active" onclick="setSlide(0)"></span>
+            <span class="dot" onclick="setSlide(1)"></span>
+            <span class="dot" onclick="setSlide(2)"></span>
+        </div>
+    </div>
+
+    <!-- ESPECIALIDADES -->
+    <section id="especialidades" class="reveal">
+        <div class="section-title">
+            <h2>Áreas de Práctica</h2>
+            <p>Soluciones jurídicas a la medida</p>
+        </div>
+        <div class="grid-practices">
+            <div class="practice-card">
+                <i class="fa-solid fa-gavel practice-icon"></i>
+                <h3>Derecho Penal Corporativo</h3>
+                <p>Defensa estratégica ante delitos patrimoniales y fiscales con máxima discreción.</p>
+            </div>
+            <div class="practice-card">
+                <i class="fa-solid fa-building-columns practice-icon"></i>
+                <h3>Derecho Corporativo</h3>
+                <p>Fusiones, auditorías legales y elaboración de contratos de alta sofisticación.</p>
+            </div>
+            <div class="practice-card">
+                <i class="fa-solid fa-people-roof practice-icon"></i>
+                <h3>Derecho Familiar</h3>
+                <p>Gestión de divorcios, juicios sucesorios y protección del patrimonio familiar.</p>
+            </div>
+            <div class="practice-card">
+                <i class="fa-solid fa-file-invoice-dollar practice-icon"></i>
+                <h3>Derecho Fiscal & Litigio</h3>
+                <p>Defensa contra créditos fiscales, auditorías y optimización tributaria.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EQUIPO -->
+    <section id="equipo" class="reveal">
+        <div class="section-title">
+            <h2>Socios y Abogados</h2>
+            <p>Trayectoria y liderazgo legal a su servicio</p>
+        </div>
+        <div class="grid-team">
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="Lic. Roberto Vance" class="team-img">
+                </div>
+                <div class="team-info">
+                    <h3>Lic. Roberto Alejandro Vance</h3>
+                    <div class="team-role">Socio Director - Penal y Fiscal</div>
+                    <span class="cedula"><i class="fa-solid fa-id-card"></i> Cédula Prof. 8492019</span>
+                    <p>Más de 18 años en litigio penal estratégico y defensa corporativa.</p>
+                    <a href="https://wa.me/525634324690?text=Deseo%20contactar%20al%20Lic.%20Roberto%20Vance" target="_blank" style="color:var(--accent-gold); text-decoration:none; font-weight:600; font-size:0.85rem;"><i class="fa-solid fa-envelope"></i> Contactar Abogado →</a>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Dra. Elena Rostova" class="team-img">
+                </div>
+                <div class="team-info">
+                    <h3>Dra. Elena Rostova Delgado</h3>
+                    <div class="team-role">Socia Senior - Corporativo</div>
+                    <span class="cedula"><i class="fa-solid fa-id-card"></i> Cédula Prof. 9301924</span>
+                    <p>Doctora en Derecho Mercantil. Especialista en inversión extranjera.</p>
+                    <a href="https://wa.me/525634324690?text=Deseo%20contactar%20a%20la%20Dra.%20Elena%20Rostova" target="_blank" style="color:var(--accent-gold); text-decoration:none; font-weight:600; font-size:0.85rem;"><i class="fa-solid fa-envelope"></i> Contactar Abogada →</a>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80" alt="Mtro. Carlos Mendoza" class="team-img">
+                </div>
+                <div class="team-info">
+                    <h3>Mtro. Carlos Mendoza Silva</h3>
+                    <div class="team-role">Socio - Litigio Civil y Familiar</div>
+                    <span class="cedula"><i class="fa-solid fa-id-card"></i> Cédula Prof. 1102948</span>
+                    <p>Especialista en mediación y resolución de conflictos familiares complejos.</p>
+                    <a href="https://wa.me/525634324690?text=Deseo%20contactar%20al%20Mtro.%20Carlos%20Mendoza" target="_blank" style="color:var(--accent-gold); text-decoration:none; font-weight:600; font-size:0.85rem;"><i class="fa-solid fa-envelope"></i> Contactar Abogado →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGENDAMIENTO -->
+    <section id="citas" class="reveal">
+        <div class="booking-container">
+            <div class="booking-text">
+                <h2>Reserve una Consulta</h2>
+                <p>Analizaremos su caso de manera confidencial y le ofreceremos una estrategia clara de resolución.</p>
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem; align-items: center;">
+                    <i class="fa-solid fa-user-shield" style="font-size:1.8rem; color:var(--accent-gold)"></i>
+                    <div>
+                        <h4 style="color:var(--text-light); font-size: 0.95rem;">Secreto Profesional</h4>
+                        <p style="font-size:0.8rem; color:var(--text-muted)">Protección bajo confidencialidad legal.</p>
+                    </div>
+                </div>
+            </div>
+            <form class="booking-form" onsubmit="sendToWhatsApp(event)">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="nombre" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label>Especialidad / Tipo de Caso</label>
+                    <select id="especialidad" required>
+                        <option value="Derecho Penal">Derecho Penal</option>
+                        <option value="Derecho Corporativo">Derecho Corporativo</option>
+                        <option value="Derecho Familiar / Divorcios">Derecho Familiar / Divorcios</option>
+                        <option value="Derecho Fiscal">Derecho Fiscal / PYMEs</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Fecha Preferida</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                <div class="form-group">
+                    <label>Breve descripción</label>
+                    <textarea id="mensaje" rows="3" placeholder="Describa brevemente la situación..." required></textarea>
+                </div>
+                <button type="submit" class="btn-gold">
+                    <i class="fa-brands fa-whatsapp"></i> Agendar por WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="reveal">
+        <div class="section-title">
+            <h2>Blog y Actualidad Legal</h2>
+            <p>Guías e información estratégica</p>
+        </div>
+        <div class="grid-blog">
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=500&q=80" class="blog-img" alt="Divorcios">
+                <div class="blog-content">
+                    <span class="blog-tag">Derecho Familiar</span>
+                    <h3>Proceso de divorcio sin afectar el patrimonio familiar</h3>
+                    <p>Puntos clave sobre la liquidación de la sociedad conyugal.</p>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=500&q=80" class="blog-img" alt="Fiscal PYMES">
+                <div class="blog-content">
+                    <span class="blog-tag">Asesoría Fiscal</span>
+                    <h3>Prevención fiscal para PYMES ante auditorías</h3>
+                    <p>Evite multas e inspecciones con un protocolo interno.</p>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=500&q=80" class="blog-img" alt="Contratos">
+                <div class="blog-content">
+                    <span class="blog-tag">Corporativo</span>
+                    <h3>Cláusulas indispensables en contratos comerciales</h3>
+                    <p>Proteja activos intangibles al contratar proveedores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/525634324690?text=Hola,%20me%20gustaría%20recibir%20información%20sobre%20sus%20servicios%20legales." target="_blank" class="btn-float-wp" title="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fa-solid fa-scale-balanced"></i> VANGUARDIA
+            </div>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">
+                Atención directa: +52 56 3432 4690
+            </p>
+            <a href="https://wa.me/525634324690" target="_blank" class="btn-gold" style="width:auto; padding: 0.5rem 1.2rem; font-size:0.85rem;">
+                Contactar
+            </a>
+        </div>
+        <p style="color:var(--text-muted); font-size: 0.75rem;">&copy; 2026 Vanguardia & Asociados. Todos los derechos reservados.</p>
+        <div class="demo-tag">DEMO — PROYECTO PRESENTACIÓN DE SERVICIOS</div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            const toggle = document.getElementById('menuToggle');
+            const overlay = document.getElementById('overlay');
+            
+            menu.classList.toggle('active');
+            toggle.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('navMenu').classList.remove('active');
+            document.getElementById('menuToggle').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+        let autoSlideInterval = setInterval(nextSlide, 5000);
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function moveSlide(direction) {
+            clearInterval(autoSlideInterval);
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function setSlide(index) {
+            clearInterval(autoSlideInterval);
+            currentSlide = index;
+            showSlide(currentSlide);
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const carouselEl = document.getElementById('inicio');
+
+        carouselEl.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        carouselEl.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 40) moveSlide(1);
+            if (touchEndX > touchStartX + 40) moveSlide(-1);
+        }
+
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const especialidad = document.getElementById('especialidad').value;
+            const fecha = document.getElementById('fecha').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            const phone = "525634324690";
+            const text = `*NUEVA SOLICITUD DE CITA*%0A%0A*Nombre:* ${nombre}%0A*Especialidad:* ${especialidad}%0A*Fecha:* ${fecha}%0A*Detalles:* ${mensaje}`;
+            
+            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        }
+
+        window.addEventListener('scroll', revealSections);
+
+        function revealSections() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 80) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        revealSections();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Boutique San Andrés | Experiencia de Lujo y Descanso</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           VARIABLES & PALETA DE COLORES (HOTEL BOUTIQUE)
+           ========================================== */
+        :root {
+            --primary: #1b3b36;       /* Verde Esmeralda Profundo / Elegancia */
+            --primary-light: #2c5e56;
+            --accent: #c5a059;        /* Dorado Cálido / Lujo */
+            --accent-hover: #b08b46;
+            --bg-light: #fdfbf7;      /* Blanco Cálido / Arena */
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* ==========================================
+           RESET & ESTILOS BASE
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            /* Ajuste dinámico con enfoque superior para preservar rostros y encadres clave */
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==========================================
+           COMPONENTES REUTILIZABLES & ANIMACIONES
+           ========================================== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 50px 0;
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: var(--white);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebc57;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Animación de Revelado */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================
+           HEADER / NAVEGACIÓN
+           ========================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 20px 0;
+        }
+
+        header.scrolled {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 12px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        header.scrolled .logo {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        header.scrolled .nav-links a {
+            color: var(--text-dark);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        header.scrolled .menu-toggle {
+            color: var(--primary);
+        }
+
+        /* Responsive Mobile Header */
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--primary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                color: var(--white) !important;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ==========================================
+           HERO SECTION
+           ========================================== */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(27,59,54,0.6) 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .hero-content {
+            max-width: 850px;
+            padding: 0 20px;
+            margin-top: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+        }
+
+        /* ==========================================
+           MOTOR DE RESERVAS (BOOKING BAR)
+           ========================================== */
+        .booking-wrapper {
+            position: relative;
+            z-index: 100;
+            margin-top: -60px;
+            padding: 0 20px;
+        }
+
+        .booking-bar {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 25px 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .booking-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .booking-item label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .booking-item input, .booking-item select {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: inherit;
+            color: var(--text-dark);
+            outline: none;
+            transition: var(--transition);
+            width: 100%;
+            background-color: #fafafa;
+        }
+
+        .booking-item input:focus, .booking-item select:focus {
+            border-color: var(--accent);
+            background-color: var(--white);
+        }
+
+        @media (max-width: 992px) {
+            .booking-wrapper {
+                margin-top: -40px;
+            }
+            .booking-bar {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        /* ==========================================
+           BENEFICIOS POR RESERVA DIRECTA
+           ========================================== */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .benefit-card {
+            background-color: var(--white);
+            padding: 35px 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            border-bottom-color: var(--accent);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           CARRUSEL / GALERÍA INTERACTIVA
+           ========================================== */
+        .carousel-section {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .carousel-section .section-header h2 {
+            color: var(--white);
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            height: 500px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                height: 350px;
+            }
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1.2s ease-in-out;
+            transform: scale(1.05);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 30px 20px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: var(--white);
+        }
+
+        .carousel-caption h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+
+        /* Controles Carrusel */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .carousel-arrow:hover {
+            background: var(--accent);
+        }
+
+        .carousel-arrow.prev { left: 20px; }
+        .carousel-arrow.next { right: 20px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--accent);
+            width: 28px;
+            border-radius: 10px;
+        }
+
+        /* ==========================================
+           HABITACIONES
+           ========================================== */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .room-img {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .room-img img {
+            transition: transform 0.6s ease;
+        }
+
+        .room-card:hover .room-img img {
+            transform: scale(1.08);
+        }
+
+        .room-price {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .room-details {
+            padding: 25px;
+        }
+
+        .room-details h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .room-features {
+            display: flex;
+            gap: 15px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        /* ==========================================
+           ITINERARIOS LOCALES / UBICACIÓN
+           ========================================== */
+        .location-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 992px) {
+            .location-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .location-info h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .itinerary-list {
+            margin-top: 25px;
+        }
+
+        .itinerary-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .itinerary-number {
+            background-color: var(--accent);
+            color: var(--white);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .map-wrapper {
+            height: 380px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        footer {
+            background-color: #122724;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-col p, .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--accent);
+        }
+
+        .demo-tag {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        /* Floating WhatsApp Button */
+        .float-whatsapp {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .float-whatsapp:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV BAR -->
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo brand-font">SAN ANDRÉS <span style="color: var(--accent);">.</span></a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#habitaciones">Habitaciones</a></li>
+                <li><a href="#destino">Ubicación</a></li>
+                <li><a href="https://wa.me/525634324690?text=Hola,%20quisiera%20más%20información%20sobre%20el%20hotel" target="_blank" class="btn btn-accent" style="padding: 8px 18px; color: #fff;">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" alt="Hotel Boutique San Andrés">
+        </div>
+        <div class="hero-content reveal">
+            <p style="letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">Un Refugio de Elegancia & Paz</p>
+            <h1>Vive una Experiencia Inolvidable</h1>
+            <p>Descubre el confort absoluto en nuestras exclusivas suites con vistas panorámicas y atención personalizada.</p>
+            <a href="#reservas" class="btn btn-accent"><i class="fas fa-calendar-check"></i> Reservar Ahora</a>
+        </div>
+    </section>
+
+    <!-- MOTOR DE RESERVAS (INTEGRADO) -->
+    <div class="container booking-wrapper reveal" id="reservas">
+        <form class="booking-bar" id="bookingForm" onsubmit="procesarReserva(event)">
+            <div class="booking-item">
+                <label><i class="far fa-calendar-alt"></i> Llegada</label>
+                <input type="date" id="checkin" required>
+            </div>
+            <div class="booking-item">
+                <label><i class="far fa-calendar-alt"></i> Salida</label>
+                <input type="date" id="checkout" required>
+            </div>
+            <div class="booking-item">
+                <label><i class="fas fa-user-friends"></i> Huéspedes</label>
+                <select id="huespedes">
+                    <option value="1 Adulto">1 Adulto</option>
+                    <option value="2 Adultos" selected>2 Adultos</option>
+                    <option value="Family (2A + 2N)">Familia (2A + 2N)</option>
+                </select>
+            </div>
+            <div class="booking-item">
+                <label><i class="fas fa-bed"></i> Habitación</label>
+                <select id="tipoHabitacion">
+                    <option value="Suite Junior">Suite Junior</option>
+                    <option value="Suite Deluxe Vista al Mar">Suite Deluxe</option>
+                    <option value="Master Suite Luxury">Master Suite</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-accent" style="height: 48px; margin-top: auto;">
+                <i class="fas fa-search"></i> Consultar
+            </button>
+        </form>
+    </div>
+
+    <!-- BENEFICIOS POR RESERVA DIRECTA -->
+    <section class="section-padding" id="beneficios">
+        <div class="container">
+            <div class="section-header reveal">
+                <p>Exclusividad Garantizada</p>
+                <h2>Beneficios de Reserva Directa</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card reveal">
+                    <i class="fas fa-tags benefit-icon"></i>
+                    <h3>15% de Descuento</h3>
+                    <p>Obtén el precio más bajo garantizado reservando directamente en nuestro sitio web.</p>
+                </div>
+                <div class="benefit-card reveal">
+                    <i class="fas fa-utensils benefit-icon"></i>
+                    <h3>Desayuno Gourmet Gratis</h3>
+                    <p>Disfruta cada mañana de nuestro desayuno artesanal preparado por chefs locales.</p>
+                </div>
+                <div class="benefit-card reveal">
+                    <i class="fas fa-clock benefit-icon"></i>
+                    <h3>Late Check-Out</h3>
+                    <p>Relájate sin prisas. Sujeto a disponibilidad, amplía tu salida hasta las 14:00 hrs.</p>
+                </div>
+                <div class="benefit-card reveal">
+                    <i class="fas fa-cocktail benefit-icon"></i>
+                    <h3>Bebida de Bienvenida</h3>
+                    <p>Recibe un cóctel de autor gratuito a tu llegada a nuestras instalaciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA / CARRUSEL ANIMADO -->
+    <section class="section-padding carousel-section" id="galeria">
+        <div class="container">
+            <div class="section-header reveal">
+                <p>Recorrido Visual</p>
+                <h2>Galería de Experiencias</h2>
+            </div>
+            <div class="carousel-container reveal">
+                <button class="carousel-arrow prev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-arrow next" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                
+                <div class="carousel-slide active">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80" alt="Habitación Suite Luxury">
+                    <div class="carousel-caption">
+                        <h3>Habitaciones de Ensueño</h3>
+                        <p>Diseño sofisticado pensado para tu descanso total.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80" alt="Alberca y Lounge">
+                    <div class="carousel-caption">
+                        <h3>Alberca & Lounge Bar</h3>
+                        <p>Espacios ideales para disfrutar del sol y bebidas exóticas.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80" alt="Spa & Relax">
+                    <div class="carousel-caption">
+                        <h3>Centro de Spa & Bienestar</h3>
+                        <p>Tratamientos holísticos para renovar tu cuerpo y mente.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HABITACIONES -->
+    <section class="section-padding" id="habitaciones">
+        <div class="container">
+            <div class="section-header reveal">
+                <p>Nuestras Opciones</p>
+                <h2>Habitaciones & Suites</h2>
+            </div>
+            <div class="rooms-grid">
+                <!-- Room 1 -->
+                <div class="room-card reveal">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80" alt="Suite Junior">
+                        <span class="room-price">$1,800 MXN / noche</span>
+                    </div>
+                    <div class="room-details">
+                        <h3>Junior Suite</h3>
+                        <div class="room-features">
+                            <span><i class="fas fa-bed"></i> 1 Cama King</span>
+                            <span><i class="fas fa-wifi"></i> Wi-Fi High Speed</span>
+                            <span><i class="fas fa-tv"></i> Smart TV</span>
+                        </div>
+                        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom: 20px;">Espaciosa suite con balcón privado, perfecta para una escapada romántica o viaje de negocios.</p>
+                        <a href="https://wa.me/525634324690?text=Hola,%20me%20interesa%20reservar%20la%20Junior%20Suite" target="_blank" class="btn btn-accent" style="width: 100%;">Reservar Habitación</a>
+                    </div>
+                </div>
+                <!-- Room 2 -->
+                <div class="room-card reveal">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="Deluxe Ocean Suite">
+                        <span class="room-price">$2,600 MXN / noche</span>
+                    </div>
+                    <div class="room-details">
+                        <h3>Suite Deluxe</h3>
+                        <div class="room-features">
+                            <span><i class="fas fa-bed"></i> 1 Cama King</span>
+                            <span><i class="fas fa-water"></i> Vista al Mar</span>
+                            <span><i class="fas fa-hot-tub"></i> Tina Jacuzzi</span>
+                        </div>
+                        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom: 20px;">Incluye vista panorámica, tina de hidromasaje y terraza privada equipada.</p>
+                        <a href="https://wa.me/525634324690?text=Hola,%20me%20interesa%20reservar%20la%20Suite%20Deluxe" target="_blank" class="btn btn-accent" style="width: 100%;">Reservar Habitación</a>
+                    </div>
+                </div>
+                <!-- Room 3 -->
+                <div class="room-card reveal">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" alt="Master Family Suite">
+                        <span class="room-price">$3,400 MXN / noche</span>
+                    </div>
+                    <div class="room-details">
+                        <h3>Master Suite</h3>
+                        <div class="room-features">
+                            <span><i class="fas fa-bed"></i> 2 Camas Queen</span>
+                            <span><i class="fas fa-users"></i> Hasta 4 personas</span>
+                            <span><i class="fas fa-glass-cheers"></i> Minibar</span>
+                        </div>
+                        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom: 20px;">Máximo lujo y espacio. Cuenta con sala de estar, minibar completo y amenidades premium.</p>
+                        <a href="https://wa.me/525634324690?text=Hola,%20me%20interesa%20reservar%20la%20Master%20Suite" target="_blank" class="btn btn-accent" style="width: 100%;">Reservar Habitación</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UBICACIÓN E ITINERARIO LOCAL -->
+    <section class="section-padding" id="destino" style="background-color: #f4efe6;">
+        <div class="container">
+            <div class="location-container">
+                <div class="location-info reveal">
+                    <p style="color: var(--accent); font-weight: 600; text-transform: uppercase;">Ubicación Privilegiada</p>
+                    <h3>Descubre el Entorno</h3>
+                    <p>Nos encontramos ubicados estratégicamente cerca de los mejores atractivos culturales, gastronómicos y naturales de la región.</p>
+                    
+                    <div class="itinerary-list">
+                        <div class="itinerary-item">
+                            <div class="itinerary-number">1</div>
+                            <div>
+                                <h4>Centro Histórico (A 5 min)</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Camina por calles empedradas, galerías de arte y arquitectura colonial.</p>
+                            </div>
+                        </div>
+                        <div class="itinerary-item">
+                            <div class="itinerary-number">2</div>
+                            <div>
+                                <h4>Ruta Gastronómica (A 10 min)</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Disfruta de la mejor cocina de autor y restaurantes premiados a pocos pasos.</p>
+                            </div>
+                        </div>
+                        <div class="itinerary-item">
+                            <div class="itinerary-number">3</div>
+                            <div>
+                                <h4>Reserva Natural (A 15 min)</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Senderismo y miradores con vistas espectaculares para conectar con la naturaleza.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-wrapper reveal">
+                    <!-- Google Maps Embed genérico para vista de mapa interactiva -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.939213190895!2d-98.2062!3d19.3182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTksMzE4Mg!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 class="brand-font">Hotel San Andrés</h4>
+                    <p>Ofreciendo hospedaje de lujo, confort y experiencias memorables desde hace más de una década.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#beneficios">Beneficios Directos</a></li>
+                        <li><a href="#galeria">Galería Fotográfica</a></li>
+                        <li><a href="#habitaciones">Habitaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-phone-alt" style="color:var(--accent);"></i> +52 56 3432 4690</p>
+                    <p><i class="fab fa-whatsapp" style="color:var(--accent);"></i> 5634324690</p>
+                    <p><i class="fas fa-envelope" style="color:var(--accent);"></i> reservaciones@hotelsanandres.com</p>
+                    <p><i class="fas fa-map-marker-alt" style="color:var(--accent);"></i> Av. Principal #100, Zona Centro</p>
+                </div>
+            </div>
+            
+            <div class="demo-tag">
+                <p>DEMO — PROYECTO DE PRESENTACIÓN</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/525634324690?text=Hola,%20me%20gustaría%20obtener%20información%20y%20promociones" class="float-whatsapp" target="_blank" title="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JAVASCRIPT / INTERACTIVIDAD -->
+    <script>
+        // --- 1. NAVBAR SCROLL EFFECT & MOBILE TOGGLE ---
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cerrar menú al dar click en un enlace (Móvil)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // --- 2. AUTOMATIC & MANUAL CAROUSEL ---
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        let slideInterval;
+
+        function showSlide(index) {
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+
+        function moveSlide(step) {
+            slideIndex += step;
+            showSlide(slideIndex);
+            resetTimer();
+        }
+
+        function currentSlide(index) {
+            slideIndex = index;
+            showSlide(slideIndex);
+            resetTimer();
+        }
+
+        function startTimer() {
+            slideInterval = setInterval(() => {
+                slideIndex++;
+                showSlide(slideIndex);
+            }, 5000); // Cambia cada 5 segundos
+        }
+
+        function resetTimer() {
+            clearInterval(slideInterval);
+            startTimer();
+        }
+
+        startTimer();
+
+        // --- 3. MOTOR DE RESERVAS (REDIRECCIÓN A WHATSAPP CON DATOS) ---
+        function procesarReserva(e) {
+            e.preventDefault();
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const huespedes = document.getElementById('huespedes').value;
+            const habitacion = document.getElementById('tipoHabitacion').value;
+
+            if(!checkin || !checkout) {
+                alert("Por favor selecciona las fechas de llegada y salida.");
+                return;
+            }
+
+            const mensaje = `Hola, deseo consultar disponibilidad para reservar:%0A` +
+                            `- Habitación: ${habitacion}%0A` +
+                            `- Entrada: ${checkin}%0A` +
+                            `- Salida: ${checkout}%0A` +
+                            `- Huéspedes: ${huespedes}`;
+
+            window.open(`https://wa.me/525634324690?text=${mensaje}`, '_blank');
+        }
+
+        // --- 4. SCROLL REVEAL ANIMATION ---
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Ejecutar una vez al cargar
+
+        // Configurar fechas por defecto en el motor de reservas
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').min = today;
+        document.getElementById('checkout').min = today;
+    </script>
+</body>
+</html>

@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIXPRESS | Soluciones Integrales de Transporte y Logística</title>
+  
+  <!-- FontAwesome Icons & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================
+       VARIABLES Y RESET (Paleta de Colores Logística)
+       ========================================== */
+    :root {
+      --primary: #0F2537;       /* Azul Marino Profundo */
+      --secondary: #1E40AF;     /* Azul Logístico / Confianza */
+      --accent: #F59E0B;        /* Amarillo Industrial / Acción */
+      --accent-hover: #D97706;  /* Amarillo Hover */
+      --dark: #0B132B;          /* Oscuro */
+      --light: #F8FAFC;         /* Fondo Claro */
+      --white: #FFFFFF;
+      --gray: #64748B;
+      --gray-light: #E2E8F0;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ==========================================
+       TRATAMIENTO Y ENFOQUE DE IMÁGENES DE PERSONAS
+       ========================================== */
+    .img-portrait, 
+    .team-card img,
+    .avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center !important; /* Preserva rostros y cabezas completas */
+    }
+
+    /* ==========================================
+       NAVEGACIÓN & HEADER (Ajustado para Zoom y Escala)
+       ========================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(15, 37, 55, 0.98);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 0.75rem 1.25rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .hamburger div {
+      width: 26px;
+      height: 3px;
+      background-color: var(--white);
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+
+    /* Menú Overlay para Móviles */
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 320px;
+      height: 100vh;
+      background: var(--primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      transition: var(--transition);
+      box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+      z-index: 1001;
+      padding: 2rem;
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-menu a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-menu a:hover {
+      color: var(--accent);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Animación del Hamburgesa */
+    .hamburger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+    .hamburger.toggle .line2 { opacity: 0; }
+    .hamburger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+
+    /* ==========================================
+       ESTILOS DE BOTONES (Sin Deformaciones)
+       ========================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.35rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    .btn-header {
+      background: var(--accent);
+      color: var(--dark);
+      padding: 0.55rem 1.15rem;
+      font-size: 0.88rem;
+      border-radius: 6px;
+    }
+
+    .btn-header:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--dark);
+      border-radius: 50px;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: var(--white);
+      border-radius: 50px;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1EBE5D;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+    }
+
+    /* ==========================================
+       HERO & CARRUSEL ANIMADO
+       ========================================== */
+    .hero {
+      position: relative;
+      margin-top: 55px;
+      height: 80vh;
+      min-height: 500px;
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      transform: scale(1.03);
+      display: flex;
+      align-items: center;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .slide-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.35);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      color: var(--white);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero-content h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .hero-content h1 span {
+      color: var(--accent);
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+      max-width: 580px;
+      color: var(--gray-light);
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      transition: var(--transition);
+    }
+
+    .carousel-arrow:hover {
+      background: var(--accent);
+      color: var(--dark);
+    }
+
+    .prev-arrow { left: 12px; }
+    .next-arrow { right: 12px; }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .dot.active {
+      background: var(--accent);
+      width: 26px;
+      border-radius: 8px;
+    }
+
+    /* ==========================================
+       SECCIONES Y COMPONENTES
+       ========================================== */
+    .section {
+      padding: 3.5rem 1.25rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title div {
+      width: 50px;
+      height: 4px;
+      background: var(--accent);
+      margin: 0.4rem auto;
+      border-radius: 2px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    /* ==========================================
+       SISTEMA DE RASTREO & CALCULADORA
+       ========================================== */
+    .interactive-card {
+      background: var(--white);
+      padding: 1.75rem;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      border-top: 5px solid var(--secondary);
+    }
+
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+    }
+
+    .tracking-result {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #EFF6FF;
+      border-left: 4px solid var(--secondary);
+      display: none;
+    }
+
+    /* ==========================================
+       FLOTA Y COBERTURA (NUEVAS IMÁGENES PRECISAS)
+       ========================================== */
+    .fleet-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fleet-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .fleet-img {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .fleet-info {
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .fleet-info h3 {
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+      font-size: 1.15rem;
+    }
+
+    /* ==========================================
+       EQUIPO / SOCIOS (Tratamiento Estricto de Fotos)
+       ========================================== */
+    .team-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .team-img-wrapper {
+      width: 100%;
+      height: 260px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-info {
+      padding: 1.1rem;
+    }
+
+    /* ==========================================
+       CERTIFICACIONES Y SEGURIDAD
+       ========================================== */
+    .cert-badge {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .cert-badge i {
+      font-size: 2.2rem;
+      color: var(--accent);
+    }
+
+    /* ==========================================
+       BOTÓN FLOTANTE WHATSAPP
+       ========================================== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 56px;
+      height: 56px;
+      background-color: #25D366;
+      color: var(--white);
+      border-radius: 50px;
+      text-align: center;
+      font-size: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+      background-color: #1EBE5D;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    /* ==========================================
+       FOOTER & DEMO NOTICE
+       ========================================== */
+    footer {
+      background: var(--primary);
+      color: var(--white);
+      padding: 2.5rem 1.25rem 1rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .demo-tag {
+      text-align: center;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 1.5rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ==========================================
+       RESPONSIVE DESIGN (Escalado sin deformaciones)
+       ========================================== */
+    @media (min-width: 850px) {
+      .hamburger { display: none; }
+      
+      .nav-menu {
+        position: static;
+        height: auto;
+        width: auto;
+        background: transparent;
+        flex-direction: row;
+        box-shadow: none;
+        gap: 1.5rem;
+        padding: 0;
+      }
+
+      .nav-menu a {
+        font-size: 0.95rem;
+      }
+
+      .hero-content h1 { font-size: 3.2rem; }
+
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+      .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay para menú móvil -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Botón Flotante de WhatsApp Directo -->
+  <a href="https://wa.me/525634324690?text=Hola,%20busco%20información%20sobre%20sus%20servicios%20de%20transporte%20y%20logística." class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Header / Navegación Re-diseñado -->
+  <header class="header">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <i class="fas fa-truck-fast"></i> LOGI<span>XPRESS</span>
+      </a>
+      
+      <div class="hamburger" id="hamburger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#cotizador" class="nav-link">Cotizador</a>
+        <a href="#rastreo" class="nav-link">Rastreo</a>
+        <a href="#flota" class="nav-link">Flota</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="https://wa.me/525634324690?text=Hola,%20deseo%20una%20cotización%20inmediata." target="_blank" class="btn btn-header">
+          <i class="fab fa-whatsapp"></i> Cotizar Ahora
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Carrusel Principal / Hero Section -->
+  <section class="hero" id="inicio">
+    <!-- Slide 1 -->
+    <div class="carousel-slide active">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80" alt="Transporte Terrestre" class="slide-bg">
+      <div class="hero-content">
+        <h1>Transporte Carga <span>Segura y Puntual</span></h1>
+        <p>Conectamos industrias en todo el país con soluciones logísticas eficientes y monitoreo en tiempo real.</p>
+        <a href="#cotizador" class="btn btn-primary"><i class="fas fa-calculator"></i> Calcular Envío</a>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1600&q=80" alt="Flota Pesada" class="slide-bg">
+      <div class="hero-content">
+        <h1>Flota Moderna y <span>Rastreo GPS 24/7</span></h1>
+        <p>Unidades equipadas con la más alta tecnología para la protección integral de tus mercancías.</p>
+        <a href="https://wa.me/525634324690?text=Solicito%20información%20de%20disponibilidad%20de%20flota" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Contactar Asesor</a>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1600&q=80" alt="Logística Integral" class="slide-bg">
+      <div class="hero-content">
+        <h1>Cobertura Nacional e <span>Internacional</span></h1>
+        <p>Llegamos a donde tu negocio lo necesite con los estándares de seguridad más exigentes del mercado.</p>
+        <a href="#rastreo" class="btn btn-primary"><i class="fas fa-search-location"></i> Rastrear Guía</a>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-arrow prev-arrow" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+    <button class="carousel-arrow next-arrow" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+
+    <div class="carousel-dots" id="carouselDots">
+      <div class="dot active" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
+      <div class="dot" data-index="2"></div>
+    </div>
+  </section>
+
+  <!-- Secciones Interactivas: Cotizador Inteligente y Sistema de Rastreo -->
+  <section class="section" id="cotizador">
+    <div class="grid-2">
+      
+      <!-- Formularios Inteligentes de Cotización -->
+      <div class="interactive-card">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <i class="fas fa-calculator" style="font-size: 1.6rem; color: var(--secondary);"></i>
+          <h2 style="color: var(--primary); font-size: 1.35rem;">Cotizador Inteligente</h2>
+        </div>
+        <form id="quoteForm">
+          <div class="form-group">
+            <label><i class="fas fa-map-marker-alt"></i> Origen</label>
+            <input type="text" id="origin" class="form-control" placeholder="Ciudad o Código Postal de Origen" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-location-arrow"></i> Destino</label>
+            <input type="text" id="destination" class="form-control" placeholder="Ciudad o Código Postal de Destino" required>
+          </div>
+          <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
+            <div class="form-group">
+              <label><i class="fas fa-boxes"></i> Tipo Carga</label>
+              <select id="cargoType" class="form-control" required>
+                <option value="General">Carga General</option>
+                <option value="Refrigerada">Refrigerada / Frágil</option>
+                <option value="Hazmat">Peligrosa (Hazmat)</option>
+                <option value="Granel">Granel / Pesada</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-weight-hanging"></i> Peso (Kg / Ton)</label>
+              <input type="text" id="weight" class="form-control" placeholder="Ej. 500 kg o 12 Ton" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-whatsapp" style="width: 100%; margin-top: 0.8rem; border-radius: 8px;">
+            <i class="fab fa-whatsapp"></i> Solicitar Cotización por WhatsApp
+          </button>
+        </form>
+      </div>
+
+      <!-- Portal de Rastreo de Envíos -->
+      <div class="interactive-card" id="rastreo" style="border-top-color: var(--accent);">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <i class="fas fa-search-location" style="font-size: 1.6rem; color: var(--accent);"></i>
+          <h2 style="color: var(--primary); font-size: 1.35rem;">Rastreo de Guía</h2>
+        </div>
+        <p style="margin-bottom: 1rem; color: var(--gray); font-size: 0.9rem;">Consulte el estado actual de su envío en tiempo real ingresando su número de rastreo.</p>
+        <form id="trackingForm">
+          <div class="form-group">
+            <label><i class="fas fa-barcode"></i> Número de Guía / Folio</label>
+            <input type="text" id="trackingId" class="form-control" placeholder="Ej. LX-984022" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 8px; margin-top: 0.5rem;">
+            <i class="fas fa-search"></i> Consultar Estado
+          </button>
+        </form>
+
+        <div class="tracking-result" id="trackingResult">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong style="color: var(--primary);">Estado: En Tránsito</strong>
+            <span style="background: #D2F5EA; color: #0D825B; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">A Tiempo</span>
+          </div>
+          <p style="font-size: 0.88rem; margin-top: 0.5rem; color: var(--dark);"><strong>Unidad:</strong> Kenworth T680 (GPS Activo)</p>
+          <p style="font-size: 0.88rem; color: var(--dark);"><strong>Ubicación Actual:</strong> Tramo Carretero Querétaro - SLP</p>
+          <a id="trackingWaLink" href="#" target="_blank" class="btn btn-whatsapp" style="padding: 0.45rem 1rem; font-size: 0.85rem; margin-top: 0.8rem; width: 100%; border-radius: 6px;">
+            <i class="fab fa-whatsapp"></i> Solicitar informe detallado a soporte
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Muestrario de Flota y Cobertura (IMÁGENES CORREGIDAS) -->
+  <section class="section" id="flota" style="background: #F1F5F9; border-radius: 16px;">
+    <div class="section-title">
+      <h2>Nuestra Flota y Cobertura</h2>
+      <div></div>
+      <p style="color: var(--gray); font-size: 0.95rem;">Unidades certificadas y acondicionadas para cualquier reto logístico.</p>
+    </div>
+
+    <div class="grid-3">
+      <!-- Unidad 1: Tractocamión / Trailer -->
+      <div class="fleet-card">
+        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Tractocamión con Remolque 53 Pies" class="fleet-img">
+        <div class="fleet-info">
+          <div>
+            <h3>Tractocamiones (Trailers)</h3>
+            <p style="color: var(--gray); font-size: 0.88rem; margin-bottom: 1.25rem;">Ideal para grandes volúmenes y rutas nacionales. Cajas secas y refrigeradas de 48 y 53 pies.</p>
+          </div>
+          <a href="https://wa.me/525634324690?text=Hola,%20requiero%20información%20sobre%20la%20renta/servicio%20de%20Tractocamiones" target="_blank" class="btn btn-primary" style="width: 100%; font-size: 0.88rem; border-radius: 6px;">
+            Consultar Disponibilidad
+          </a>
+        </div>
+      </div>
+
+      <!-- Unidad 2: Camión Rabón / Tándem -->
+      <div class="fleet-card">
+        <img src="https://images.unsplash.com/photo-1591768793355-74d04bb6608f?auto=format&fit=crop&w=800&q=80" alt="Camión Rabón Carga Mediana" class="fleet-img">
+        <div class="fleet-info">
+          <div>
+            <h3>Camiones Rabón y Tándem</h3>
+            <p style="color: var(--gray); font-size: 0.88rem; margin-bottom: 1.25rem;">Carga mediana para distribución interurbana y regional con alta capacidad de maniobra.</p>
+          </div>
+          <a href="https://wa.me/525634324690?text=Hola,%20requiero%20información%20sobre%20Camiones%20Rabón" target="_blank" class="btn btn-primary" style="width: 100%; font-size: 0.88rem; border-radius: 6px;">
+            Consultar Disponibilidad
+          </a>
+        </div>
+      </div>
+
+      <!-- Unidad 3: Van de Carga Express -->
+      <div class="fleet-card">
+        <img src="https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=800&q=80" alt="Van de Carga Express" class="fleet-img">
+        <div class="fleet-info">
+          <div>
+            <h3>Vans y Unidades Ligeras</h3>
+            <p style="color: var(--gray); font-size: 0.88rem; margin-bottom: 1.25rem;">Entregas urgentes, logística 'Última Milla' y mercancía de alto valor con envío express.</p>
+          </div>
+          <a href="https://wa.me/525634324690?text=Hola,%20requiero%20servicio%20de%20unidades%20ligeras%20o%20Express" target="_blank" class="btn btn-primary" style="width: 100%; font-size: 0.88rem; border-radius: 6px;">
+            Consultar Disponibilidad
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificaciones de Seguridad -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Seguridad y Certificaciones</h2>
+      <div></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="cert-badge">
+        <i class="fas fa-shield-alt"></i>
+        <div>
+          <h4 style="color: var(--primary);">Póliza de Seguro Total</h4>
+          <p style="font-size: 0.85rem; color: var(--gray);">Cobertura completa de mercancía desde origen hasta destino.</p>
+        </div>
+      </div>
+
+      <div class="cert-badge">
+        <i class="fas fa-satellite-dish"></i>
+        <div>
+          <h4 style="color: var(--primary);">Monitoreo GPS 24/7</h4>
+          <p style="font-size: 0.85rem; color: var(--gray);">Rastreo satelital constante y paros de motor remotos.</p>
+        </div>
+      </div>
+
+      <div class="cert-badge">
+        <i class="fas fa-certificate"></i>
+        <div>
+          <h4 style="color: var(--primary);">Certificación C-TPAT</h4>
+          <p style="font-size: 0.85rem; color: var(--gray);">Estándares internacionales para cadena de suministro segura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Equipo / Socios (Regla de Tratamiento de Imágenes) -->
+  <section class="section" id="nosotros">
+    <div class="section-title">
+      <h2>Nuestros Directivos y Socios</h2>
+      <div></div>
+      <p style="color: var(--gray); font-size: 0.95rem;">Liderazgo con más de 15 años de experiencia en logística integral.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="team-card">
+        <div class="team-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="Socio Operativo" class="img-portrait">
+        </div>
+        <div class="team-info">
+          <h3 style="color: var(--primary); font-size: 1.05rem;">Carlos Mendoza</h3>
+          <p style="color: var(--secondary); font-size: 0.82rem; font-weight: 600;">Director de Operaciones</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Socia de Logística" class="img-portrait">
+        </div>
+        <div class="team-info">
+          <h3 style="color: var(--primary); font-size: 1.05rem;">Elena Rostova</h3>
+          <p style="color: var(--secondary); font-size: 0.82rem; font-weight: 600;">Gerente de Logística Global</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80" alt="Socio Comercial" class="img-portrait">
+        </div>
+        <div class="team-info">
+          <h3 style="color: var(--primary); font-size: 1.05rem;">Ricardo Gómez</h3>
+          <p style="color: var(--secondary); font-size: 0.82rem; font-weight: 600;">Director de Seguridad y Monitoreo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <a href="#" class="logo" style="margin-bottom: 0.75rem;">
+          <i class="fas fa-truck-fast"></i> LOGI<span>XPRESS</span>
+        </a>
+        <p style="color: var(--gray-light); font-size: 0.88rem;">Líderes en soluciones de transporte y logística nacional. Seguridad, velocidad y profesionalismo garantizado.</p>
+      </div>
+
+      <div>
+        <h4 style="color: var(--accent); margin-bottom: 0.75rem;">Contacto Directo</h4>
+        <p style="font-size: 0.88rem;"><i class="fas fa-phone"></i> Teléfono: 5634324690</p>
+        <p style="font-size: 0.88rem; margin-top: 0.4rem;"><i class="fab fa-whatsapp"></i> WhatsApp: 5634324690</p>
+        <p style="font-size: 0.88rem; margin-top: 0.4rem;"><i class="fas fa-envelope"></i> contacto@logixpress.com</p>
+      </div>
+
+      <div>
+        <h4 style="color: var(--accent); margin-bottom: 0.75rem;">Horarios de Atención</h4>
+        <p style="font-size: 0.88rem;">Oficinas: Lunes a Viernes 8:00 AM - 7:00 PM</p>
+        <p style="font-size: 0.88rem; margin-top: 0.4rem;">Monitoreo GPS & Soporte: 24 Horas / 365 Días</p>
+      </div>
+    </div>
+
+    <!-- Etiqueta DEMO requerida -->
+    <div class="demo-tag">
+      DEMO - PROYECTO DE PRESENTACIÓN Y CAPTACIÓN
+    </div>
+  </footer>
+
+  <!-- LÓGICA Y ANIMACIONES JAVASCRIPT -->
+  <script>
+    // ==========================================
+    // 1. MENÚ HAMBURGUESA & OVERLAY (Mobile-First)
+    // ==========================================
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const overlay = document.getElementById('overlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function toggleMenu() {
+      hamburger.classList.toggle('toggle');
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if(navMenu.classList.contains('active')) toggleMenu();
+      });
+    });
+
+    // ==========================================
+    // 2. CARRUSEL AUTOMÁTICO E INTERACTIVO
+    // ==========================================
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentSlide = 0;
+    let slideInterval;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        dots[i].classList.remove('active');
+      });
+
+      currentSlide = (index + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    function startAutoSlide() {
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(slideInterval);
+    }
+
+    nextBtn.addEventListener('click', () => { nextSlide(); stopAutoSlide(); startAutoSlide(); });
+    prevBtn.addEventListener('click', () => { prevSlide(); stopAutoSlide(); startAutoSlide(); });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const index = parseInt(e.target.getAttribute('data-index'));
+        showSlide(index);
+        stopAutoSlide();
+        startAutoSlide();
+      });
+    });
+
+    startAutoSlide();
+
+    // ==========================================
+    // 3. ENVIAR COTIZACIÓN DIRECTA A WHATSAPP
+    // ==========================================
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const origin = document.getElementById('origin').value;
+      const destination = document.getElementById('destination').value;
+      const cargoType = document.getElementById('cargoType').value;
+      const weight = document.getElementById('weight').value;
+
+      const phone = "525634324690";
+      const text = `Hola LOGIXPRESS, solicito una cotización con los siguientes datos:%0A%0A` +
+                   `📍 *Origen:* ${encodeURIComponent(origin)}%0A` +
+                   `🏁 *Destino:* ${encodeURIComponent(destination)}%0A` +
+                   `📦 *Tipo de Carga:* ${encodeURIComponent(cargoType)}%0A` +
+                   `⚖️ *Peso/Volumen:* ${encodeURIComponent(weight)}`;
+
+      window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    });
+
+    // ==========================================
+    // 4. SIMULADOR DE RASTREO DE GUÍA
+    // ==========================================
+    document.getElementById('trackingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const trackingId = document.getElementById('trackingId').value;
+      const trackingResult = document.getElementById('trackingResult');
+      const trackingWaLink = document.getElementById('trackingWaLink');
+
+      trackingResult.style.display = 'block';
+
+      const phone = "525634324690";
+      const text = `Hola, quisiera solicitar asistencia y un informe detallado sobre el estatus de mi número de guía: *${encodeURIComponent(trackingId)}*`;
+      trackingWaLink.href = `https://wa.me/${phone}?text=${text}`;
+    });
+  </script>
+</body>
+</html>
