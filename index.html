@@ -643,6 +643,134 @@
             line-height: 1.6;
         }
 
+        /* ===== Precios / Planes ===== */
+        .promo-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(192, 38, 211, 0.1);
+            border: 1px solid rgba(192, 38, 211, 0.35);
+            color: #f472b6;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px 20px;
+            border-radius: 14px;
+            max-width: 560px;
+            margin: 0 auto 45px;
+            text-align: center;
+        }
+        .promo-banner i { color: #c026d3; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: var(--transition);
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .pricing-card.featured {
+            border: 1px solid transparent;
+            background:
+                linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+                var(--accent-gradient) border-box;
+            transform: scale(1.04);
+        }
+        .pricing-card.featured:hover { transform: scale(1.04) translateY(-10px); }
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            white-space: nowrap;
+        }
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            text-align: center;
+        }
+        .pricing-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 24px;
+            min-height: 40px;
+        }
+        .price-box {
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .price-old {
+            display: block;
+            color: var(--text-muted);
+            font-size: 1rem;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        .price-new {
+            display: block;
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .price-new small {
+            font-size: 1rem;
+            font-weight: 600;
+            -webkit-text-fill-color: var(--text-muted);
+        }
+        .price-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-bottom: 28px;
+        }
+        .pricing-card ul {
+            list-style: none;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        .pricing-card ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .pricing-card ul li i { color: #3b82f6; font-size: 0.9rem; margin-top: 3px; }
+        .pricing-card .btn { width: 100%; }
+        .pricing-footnote {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-top: 35px;
+        }
+
         /* Adaptabilidad Móvil */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
@@ -683,6 +811,8 @@
             .process-track::before { display: none; }
             .carousel-caption { flex-direction: column; align-items: flex-start; padding: 20px; }
             .carousel-arrow { width: 38px; height: 38px; }
+            .pricing-card.featured { transform: none; }
+            .pricing-card.featured:hover { transform: translateY(-10px); }
         }
 
         @media (max-width: 480px) {
@@ -707,6 +837,7 @@
             <li><a href="#sectores">Especialización</a></li>
             <li><a href="#proceso">Proceso</a></li>
             <li><a href="#galeria">Portafolio</a></li>
+            <li><a href="#precios">Precios</a></li>
             <li><a href="#objetivos">Objetivos</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li class="nav-cta-mobile"><a href="#cotizar" class="btn btn-gradient" style="display:inline-block;">Solicitar Propuesta</a></li>
@@ -926,6 +1057,149 @@
         </div>
         <div class="carousel-dots" id="carouselDots"></div>
     </section>
+
+    <!-- Precios y Planes -->
+    <section class="section" id="precios">
+        <header class="section-header reveal">
+            <h2 class="section-title">Planes y Precios</h2>
+            <p class="section-subtitle">Inversión transparente en pesos mexicanos, sin costos ocultos</p>
+        </header>
+
+        <div class="promo-banner reveal" id="promoBanner">
+            <i class="fa-solid fa-fire"></i>
+            <span id="promoBannerText">Oferta de lanzamiento — <strong id="promoSpotsText">quedan 9 de 10 lugares con descuento</strong></span>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card reveal reveal-delay-1" data-promo-price="2999" data-promo-old="6000" data-regular-price="5999">
+                <h3>Esencial</h3>
+                <p class="pricing-desc">Ideal para negocios que inician su presencia digital.</p>
+                <div class="price-box">
+                    <span class="price-old">$6,000 MXN</span>
+                    <span class="price-new">$2,999 <small>MXN</small></span>
+                </div>
+                <p class="price-note">Pago único</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Landing page de 1 sección</li>
+                    <li><i class="fa-solid fa-check"></i> Diseño responsivo (móvil y escritorio)</li>
+                    <li><i class="fa-solid fa-check"></i> Botón flotante de WhatsApp</li>
+                    <li><i class="fa-solid fa-check"></i> Formulario de contacto</li>
+                    <li><i class="fa-solid fa-check"></i> 1 ronda de revisiones</li>
+                    <li><i class="fa-solid fa-check"></i> Entrega en 5-7 días hábiles</li>
+                </ul>
+                <a href="#cotizar" class="btn btn-outline">Elegir Esencial</a>
+            </div>
+
+            <div class="pricing-card featured reveal reveal-delay-2" data-promo-price="5999" data-promo-old="10000" data-regular-price="11999">
+                <span class="popular-badge">Más popular</span>
+                <h3>Profesional</h3>
+                <p class="pricing-desc">El estándar de los sitios de nuestro portafolio.</p>
+                <div class="price-box">
+                    <span class="price-old">$10,000 MXN</span>
+                    <span class="price-new">$5,999 <small>MXN</small></span>
+                </div>
+                <p class="price-note">Pago único</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Sitio multi-sección (hero, servicios, galería, equipo, FAQ)</li>
+                    <li><i class="fa-solid fa-check"></i> Animaciones y microinteracciones</li>
+                    <li><i class="fa-solid fa-check"></i> WhatsApp + formulario avanzado</li>
+                    <li><i class="fa-solid fa-check"></i> Optimización SEO básica</li>
+                    <li><i class="fa-solid fa-check"></i> 3 rondas de revisiones</li>
+                    <li><i class="fa-solid fa-check"></i> Entrega en 10-15 días hábiles</li>
+                </ul>
+                <a href="#cotizar" class="btn btn-gradient">Elegir Profesional</a>
+            </div>
+
+            <div class="pricing-card reveal reveal-delay-3" data-promo-price="9999" data-promo-old="20000" data-regular-price="19999">
+                <h3>Premium</h3>
+                <p class="pricing-desc">Para negocios que necesitan más de una página o funciones a medida.</p>
+                <div class="price-box">
+                    <span class="price-old">$20,000 MXN</span>
+                    <span class="price-new">$9,999 <small>MXN</small></span>
+                </div>
+                <p class="price-note">Pago único</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Sitio multi-página (Inicio, Nosotros, Servicios, Blog, Contacto)</li>
+                    <li><i class="fa-solid fa-check"></i> Catálogo o portafolio dinámico</li>
+                    <li><i class="fa-solid fa-check"></i> Integraciones a medida (cotizadores, citas, rastreo)</li>
+                    <li><i class="fa-solid fa-check"></i> SEO avanzado + Google Analytics</li>
+                    <li><i class="fa-solid fa-check"></i> Revisiones ilimitadas por 30 días</li>
+                    <li><i class="fa-solid fa-check"></i> 1 mes de soporte post-entrega incluido</li>
+                </ul>
+                <a href="#cotizar" class="btn btn-outline">Elegir Premium</a>
+            </div>
+        </div>
+        <p class="pricing-footnote reveal" id="pricingFootnote">*Quedan 9 lugares con descuento de lanzamiento. Promoción válida por tiempo limitado.</p>
+    </section>
+
+    <!-- Lógica de precios y contador de promoción -->
+    <script>
+        (function() {
+            const PROMO_LIMIT = 10;
+            const DEFAULT_CLAIMED = 1; // Inicia mostrando "quedan 9 de 10 lugares"
+            const STORAGE_KEY = 'anru_promo_claimed';
+
+            function getClaimed() {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                const value = stored === null ? DEFAULT_CLAIMED : parseInt(stored, 10);
+                return Math.min(Math.max(value, 0), PROMO_LIMIT);
+            }
+
+            function formatMXN(value) {
+                return '$' + Number(value).toLocaleString('es-MX') + ' MXN';
+            }
+
+            function renderPricing() {
+                const claimed = getClaimed();
+                const remaining = PROMO_LIMIT - claimed;
+                const banner = document.getElementById('promoBanner');
+                const spotsText = document.getElementById('promoSpotsText');
+                const footnote = document.getElementById('pricingFootnote');
+                const cards = document.querySelectorAll('.pricing-card');
+
+                if (remaining > 0) {
+                    banner.style.display = 'flex';
+                    spotsText.textContent = `quedan ${remaining} de ${PROMO_LIMIT} lugares con descuento`;
+                    footnote.textContent = `*Quedan ${remaining} lugares con descuento de lanzamiento. Promoción válida por tiempo limitado.`;
+
+                    cards.forEach(card => {
+                        const oldEl = card.querySelector('.price-old');
+                        const newEl = card.querySelector('.price-new');
+                        oldEl.style.display = 'block';
+                        oldEl.textContent = formatMXN(card.dataset.promoOld);
+                        newEl.innerHTML = '$' + Number(card.dataset.promoPrice).toLocaleString('es-MX') + ' <small>MXN</small>';
+                    });
+                } else {
+                    banner.style.display = 'none';
+                    footnote.textContent = 'Precios regulares. ¡Gracias a todos los que aprovecharon la oferta de lanzamiento!';
+
+                    cards.forEach(card => {
+                        const oldEl = card.querySelector('.price-old');
+                        const newEl = card.querySelector('.price-new');
+                        oldEl.style.display = 'none';
+                        newEl.innerHTML = '$' + Number(card.dataset.regularPrice).toLocaleString('es-MX') + ' <small>MXN</small>';
+                    });
+                }
+            }
+
+            function claimSpot() {
+                const claimed = getClaimed();
+                if (claimed < PROMO_LIMIT) {
+                    localStorage.setItem(STORAGE_KEY, claimed + 1);
+                }
+                renderPricing();
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                renderPricing();
+                const form = document.getElementById('formCotizacion');
+                if (form) {
+                    form.addEventListener('submit', claimSpot);
+                }
+            });
+        })();
+    </script>
+
 
     <!-- Objetivos alcanzables con una página web -->
     <section class="section" id="objetivos">
